@@ -11,7 +11,12 @@ export const plugins = [
         id: "textCenterDonut",
         beforeDatasetsDraw(chart: Chart, args: { cancelable: true }, options: any){
             const { ctx, data } = chart;
-    
+            let totalShare = 0;
+            
+            marketShare.map((eachCompany) => {
+                totalShare += eachCompany.share;
+            });
+
             ctx.save();
             const xCoor = chart.getDatasetMeta(0).data[0].x;
             const yCoor = chart.getDatasetMeta(0).data[0].y;
@@ -21,7 +26,7 @@ export const plugins = [
             ctx.textBaseline = "middle";
             
             ctx.fillText(
-                `text`, xCoor, yCoor
+                `${totalShare}M`, xCoor, yCoor
             );
         }
     }
@@ -35,6 +40,16 @@ export const options = {
         legend: {
             display: false,
         },
+        tooltip: {
+            displayColors: false,
+            titleMarginBottom: 0,
+            callbacks: {
+                title: function(context: any){
+                    return `${context[0].label}: ${context[0].formattedValue}M`;
+                },
+                label: function() { return '' }
+            }
+        }
     }
 }
 
@@ -44,12 +59,7 @@ export const data = {
     {
     //   label: '# of Votes',
       data: marketShare.map(a => a.share),
-      backgroundColor: [
-        '#2c7be5',
-        '#27bcfd',
-        '#1b83b0',
-        '#0f4a63',
-      ],
+      backgroundColor: marketShare.map(a => a.color),
       borderWidth: 1,
       offset: 10
     },

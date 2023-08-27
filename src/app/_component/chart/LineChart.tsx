@@ -11,8 +11,8 @@ import {
     Legend,
   } from 'chart.js';
   import { Line } from 'react-chartjs-2';
-  
-  import { totalOrder } from '@/../raw_data/raw_data';
+
+  import { totalSales } from '@/../raw_data/raw_data';
 
   ChartJS.register(
     CategoryScale,
@@ -44,10 +44,18 @@ export const options = {
                 label: function() { return '' }
             }
         },
-        // title: {
-        //     display: true,
-        //     text: 'Chart.js Line Chart',
-        // },
+        title: {
+            display: true,
+            text: 'Total sales' as const,
+            font: {
+                size: 30,
+                weigh: 900
+            },
+            color: "black",
+            padding: {
+                bottom: 50
+            }
+        },
     },
     hover: {
         mode: "index" as const,
@@ -55,43 +63,56 @@ export const options = {
     },
     scales: {
         x: {
-            display: false,
+            border: {
+                display: false
+            },
+            grid: {
+                display: false,
+            }
         },
         y: {
-            display: false,
+            beginAtZero: true,
+            border: {
+                display: false
+            },
+            ticks: {
+                // forces step size to be 30 units
+                stepSize: 30,
+                // padding: 30
+            }
         }
     },
     elements:{
         point:{
-            borderWidth: 0,
-            radius: 10,
-            backgroundColor: 'rgba(0,0,0,0)',
+            // borderWidth: 0,
+            // radius: 10,
+            backgroundColor: 'transparent' as const,
         }
     },
 };
 
-const labels = totalOrder.map(a => `Week ${a.week}`);
+const labels = totalSales.map(a => a.month);
 
 export const data = {
   labels,
   datasets: [
     {
         // label: "",
-        data: totalOrder.map(a => a.data),
+        data: totalSales.map(a => a.amount),
         borderColor: '#0d6efd',
-        lineTension: 0.4,
-        pointHoverRadius: 0,
-        pointRadius: 0,
+        lineTension: 0,
+        pointHoverRadius: 5,
+        pointRadius: 5,
     },
   ],
 };
 
-const SmallLineChart = () => {
+const LineChart = () => {
     return ( 
-        <div className="py-3">
+        <div className="py-3 h-100">
             <Line options={options} data={data} />
         </div>
     );
 }
  
-export default SmallLineChart;
+export default LineChart;
