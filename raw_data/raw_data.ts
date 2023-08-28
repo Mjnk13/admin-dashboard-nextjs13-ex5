@@ -116,7 +116,101 @@ export const totalSales = [
         amount: 40,
     },
     {
-        month: "September",
+        month: "December",
         amount: 50,
     }
 ]
+
+// export const TopProducts = {
+//     "Iphone 14": [
+//         {
+//             "year": 2018,
+//             "data": 83
+//         },
+//         {
+//             "year": 2019,
+//             "data": 45
+//         }
+//     ],
+//     "Samsung Galaxy": [
+//         {
+//             "year": 2018,
+//             "data": 73
+//         },
+//         {
+//             "year": 2019,
+//             "data": 83
+//         }
+//     ],
+//     "Xiaomi Redmi": [
+//         {
+//             "year": 2018,
+//             "data": 62
+//         },
+//         {
+//             "year": 2019,
+//             "data": 86
+//         }
+//     ],
+//     "OPPO Reno8": [
+//         {
+//             "year": 2018,
+//             "data": 53
+//         },
+//         {
+//             "year": 2019,
+//             "data": 72
+//         }
+//     ],
+//     "Vivo Y16": [
+//         {
+//             "year": 2018,
+//             "data": 50
+//         },
+//         {
+//             "year": 2019,
+//             "data": 80
+//         }
+//     ],
+//     "Realme C55": [
+//         {
+//             "year": 2018,
+//             "data": 70
+//         },
+//         {
+//             "year": 2019,
+//             "data": 50
+//         }
+//     ],
+//     "Nokia G22": [
+//         {
+//             "year": 2018,
+//             "data": 90
+//         },
+//         {
+//             "year": 2019,
+//             "data": 80
+//         }
+//     ]
+// }
+
+export const TopProducts = {
+    "2018": {
+        "Iphone 14": 83,
+        "Samsung Galaxy": 73,
+        "Xiaomi Redmi": 62,
+        "OPPO Reno8": 53,
+        "Vivo Y16": 50,
+        "Realme C55": 70,
+        "Nokia G22": 90
+    },
+    "2019": {
+        "Iphone 14": 45,
+        "Samsung Galaxy": 83,
+        "Xiaomi Redmi": 86,
+        "OPPO Reno8": 72,
+        "Vivo Y16": 80,
+        "Realme C55": 50,
+        "Nokia G22": 80
+    }
+}

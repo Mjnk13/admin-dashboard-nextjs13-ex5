@@ -9,20 +9,36 @@ import {
     Title,
     Tooltip,
     Legend,
+    Chart,
+    LabelItem,
   } from 'chart.js';
-  import { Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
-  import { totalSales } from '@/../raw_data/raw_data';
+import { totalSales } from '@/../raw_data/raw_data';
 
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+ChartJS.register(
+CategoryScale,
+LinearScale,
+PointElement,
+LineElement,
+Title,
+Tooltip,
+Legend
+);
+
+export const plugins = [
+    {
+        id: "scalePadding",
+        beforeDatasetsDraw(chart: Chart, args: { cancelable: true }, options: any) {
+            const { ctx, data, scales: {x, y} } = chart;
+
+            x.getLabelItems().map((label: LabelItem, index: number) => {
+                label.options.textBaseline = "middle";
+                label.textOffset = 5 + 20
+            });
+        }
+    }
+];
 
 export const options = {
     maintainAspectRatio: false,
@@ -39,7 +55,7 @@ export const options = {
             titleMarginBottom: 0,
             callbacks: {
                 title: function(context: any){
-                    return `${context[0].label}: ${context[0].formattedValue}`;
+                    return `${month[context[0].dataIndex]}: ${context[0].formattedValue}`;
                 },
                 label: function() { return '' }
             }
@@ -68,30 +84,35 @@ export const options = {
             },
             grid: {
                 display: false,
+            },
+            afterFit: function(context: any) {
+                context.height += 20
             }
         },
         y: {
             beginAtZero: true,
             border: {
-                display: false
+                display: false,
+                dash: [8,4],
             },
             ticks: {
                 // forces step size to be 30 units
                 stepSize: 30,
-                // padding: 30
-            }
+                padding: 25
+            },
         }
     },
     elements:{
         point:{
             // borderWidth: 0,
             // radius: 10,
-            backgroundColor: 'transparent' as const,
+            backgroundColor: '#e2e3e5' as const,
         }
     },
 };
 
-const labels = totalSales.map(a => a.month);
+const month = totalSales.map(a => a.month);
+const labels = month.map(a => a.substring(0,3));
 
 export const data = {
   labels,
@@ -110,7 +131,7 @@ export const data = {
 const LineChart = () => {
     return ( 
         <div className="py-3 h-100">
-            <Line options={options} data={data} />
+            <Line options={options} data={data} plugins={plugins} />
         </div>
     );
 }

@@ -1,3 +1,4 @@
+import BarChart from './_component/chart/BarChart';
 import DonutChart from './_component/chart/DonutChart';
 import LineChart from './_component/chart/LineChart';
 import ProgressChartList from './_component/chart/ProgressChartList';
@@ -15,6 +16,15 @@ export default function Home() {
     <main className="mt-3">
       <div className='container'>
         <div className="row">
+          <div className='col-2'/>
+          <div className='col-8 py-3 px-4'>
+            <div className="background-shadow bg-secondary-subtle py-3 px-4 text-center">
+              <h1>Welcome, Admin</h1>
+              <img src="/admin-avatar.png" className='my-2' alt="Admin Avatar" style={{width: "10rem", height: "10rem", borderRadius: "50%", border: 'solid 4px black'}}/>
+              <p className='mt-2'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis necessitatibus quidem rem nihil.</p>
+            </div>
+          </div>
+          <div className='col-2'/>
           <div className="col-md-6 justify-content-between py-3 px-4">
             <div className="row background-shadow bg-secondary-subtle py-3 px-4 h-100">
               <div className="weekly-sale-info col-md-6 align-self-center">
@@ -66,10 +76,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='col-12 py-3 px-4'>
+          <div className='col-12 py-3 pe-4'>
             <div className='background-shadow bg-secondary-subtle py-3 px-4'>
                 <div className="chart-box">
                     <LineChart/>
+                </div>
+            </div>
+          </div>
+
+          <div className='col-12 py-3 pe-4'>
+            <div className='background-shadow bg-secondary-subtle py-3 px-4'>
+                <div className="chart-box">
+                    <BarChart />
                 </div>
             </div>
           </div>
